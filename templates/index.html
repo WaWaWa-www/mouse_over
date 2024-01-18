@@ -3,14 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <title>ポップアップメッセージ</title>
+    <title>ラジオボタンのマウスオーバーメッセージ</title>
+    <style>
+        /* スタイルは任意で変更可能 */
+        label {
+            display: inline-block;
+            margin-right: 20px; /* ボタン間の間隔を調整 */
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <button id="popup-trigger">ボタン</button>
-        <div id="popup-message" class="hidden">メッセージがここに表示されます</div>
-    </div>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+<!-- ラジオボタンとラベルのセット -->
+<label for="option1" onmouseover="showMessage('ラジオボタン1の説明です。')" onmouseout="hideMessage()">
+    <input type="radio" id="option1" name="options"> ラジオボタン1
+</label>
+
+<label for="option2" onmouseover="showMessage('ラジオボタン2の説明です。')" onmouseout="hideMessage()">
+    <input type="radio" id="option2" name="options"> ラジオボタン2
+</label>
+
+<!-- メッセージ表示用の要素 -->
+<div id="messageBox" style="position: absolute; display: none; background-color: #f1f1f1; padding: 10px; border: 1px solid #d4d4d4;"></div>
+
+<script>
+    // マウスオーバー時にメッセージを表示する関数
+    function showMessage(message) {
+        var messageBox = document.getElementById('messageBox');
+        messageBox.innerHTML = message;
+        messageBox.style.display = 'block';
+
+        // メッセージボックスをマウスカーソルの右上に配置
+        document.addEventListener('mousemove', updateMessageBoxPosition);
+    }
+
+    // マウスアウト時にメッセージを非表示にする関数
+    function hideMessage() {
+        var messageBox = document.getElementById('messageBox');
+        messageBox.style.display = 'none';
+
+        // イベントリスナーを削除
+        document.removeEventListener('mousemove', updateMessageBoxPosition);
+    }
+
+    // メッセージボックスの位置を更新する関数
+    function updateMessageBoxPosition(event) {
+        var messageBox = document.getElementById('messageBox');
+        messageBox.style.top = (event.clientY - 30) + 'px'; // 30は適切なオフセットです
+        messageBox.style.left = (event.clientX + 20) + 'px'; // 20は適切なオフセットです
+    }
+</script>
+
 </body>
 </html>
