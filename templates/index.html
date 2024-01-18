@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>ポップアップメッセージ</title>
+</head>
+<body>
+    <div class="container">
+        <button id="popup-trigger">ボタン</button>
+        <div id="popup-message" class="hidden">メッセージがここに表示されます</div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
